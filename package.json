@@ -1,0 +1,13 @@
+{
+  "name": "8trax",
+  "description": "8Tracks.com spider",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.4.0",
+    "request": "2.27.0",
+    "consolidate": "0.9.1",
+    "jade": "0.35.0",
+    "jquery": "1.8.3"
+  }
+}
