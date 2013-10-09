@@ -16,13 +16,6 @@ app.configure(function(){
   app.set('view engine', 'jade');
 });
 
-app.get('/get_token', function(req, resp){
-
-
-  // end the server request
-  resp.end();
-});
-
 app.get('/download', function(req, resp){
   resp.render('download');
 });
