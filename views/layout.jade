@@ -1,7 +1,7 @@
 doctype 5
 html(lang="en")
   head
-    title Download 8Tracks Playlist
+    title Download 8tracks Playlist
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel="stylesheet", type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css")
     script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
@@ -9,8 +9,6 @@ html(lang="en")
     script(type="text/javascript", src="/js/main.js")
 
   body
-    h1 Download 8Tracks Songs
-    #container.col
-      form(action="/playlist", method="post")
-        input(name="playlist_url", type="text", placeholder="8tracks playlist url")
-        input(type="submit", value="Get playlist")
+    .container
+        h1 Download 8Tracks Songs
+        block content

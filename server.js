@@ -1,8 +1,13 @@
+/**
+* 8Tracks Playlist Downloader
+*/
+
 var express = require('express');
 var request = require('request');
 var engines = require('consolidate');
 var app = express();
 
+// actual playtoken that is used in the session
 var play_token;
 
 app.use(express.logger());
@@ -15,8 +20,8 @@ app.configure(function(){
   app.set('view engine', 'jade');
 });
 
-app.get('/download', function(req, resp){
-  resp.render('download');
+app.get('/', function(req, resp){
+  resp.render('index');
 });
 
 app.post('/playlist', function(req, resp){
@@ -37,9 +42,6 @@ app.post('/playlist', function(req, resp){
         function(error, response, body){
           play_token = body.play_token;
 
-          var song = get_next_song(play_token, playlist_id);
-          // console.log(song);
-
       });
     }
   });
@@ -50,7 +52,6 @@ app.post('/playlist', function(req, resp){
 var get_next_song = function ( play_token, playlist_id ){
   var song = false;
   var b = request.get({url: 'http://8tracks.com/sets/' + play_token + '/next?mix_id=' + playlist_id + '&format=jsonh', json:true});
-
 };
 
 var port = process.env.PORT || 3000;
