@@ -1,8 +1,11 @@
 {
-  "name": "8trax",
-  "description": "8Tracks.com spider",
+  "name": "8tracks-playlist-downloader-nodejs",
+  "description": "Node.js web interface to download 8tracks playlists",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": ">=0.10"
+  }
   "dependencies": {
     "express": "3.4.0",
     "request": "2.27.0",
