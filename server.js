@@ -1,7 +1,6 @@
 var express = require('express');
 var request = require('request');
 var engines = require('consolidate');
-var $ = require('jquery').create();
 var app = express();
 
 var play_token;
