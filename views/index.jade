@@ -1,7 +1,8 @@
 extends layout
 block content
+  p Enter the URL of the playlist:
   form(role="form", action="/playlist", method="post")
     .form-group
       label.sr-only(for="playlist_url") 8tracks Playlist URL
-      input.input-lg.form-control#playlist_url(name="playlist_url", type="text", placeholder="8tracks Playlist URL")
-    button.btn.btn-primary.btn-lg(type="submit") Get Playlist
+      input.input-lg.form-control#playlist_url(name="playlist_url", type="text", placeholder="http://8tracks.com/playlist/playlist-awesome-name")
+    button.btn.btn-primary.btn-lg(type="submit") Download Playlist
