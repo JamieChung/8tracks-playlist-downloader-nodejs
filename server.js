@@ -39,9 +39,14 @@ app.post('/playlist', function(req, resp){
 
       // let us get a token
       request.get({url: 'http://8tracks.com/sets/new?format=jsonh', json: true},
-        function(error, response, body){
+        function (error, response, body){
           play_token = body.play_token;
 
+          // start playing first track
+          request.get({url: 'http://8tracks.com/sets/' + play_token + '/play?mix_id=' + playlist_id + '&format=jsonh', json: true},
+            function (error, response, body){
+              download_song(resp, play_token, playlist_id, body.set);
+          });
       });
     }
   });
@@ -49,9 +54,14 @@ app.post('/playlist', function(req, resp){
   resp.end();
 });
 
-var get_next_song = function ( play_token, playlist_id ){
-  var song = false;
-  var b = request.get({url: 'http://8tracks.com/sets/' + play_token + '/next?mix_id=' + playlist_id + '&format=jsonh', json:true});
+var download_song = function(response, play_token, playlist_id, set) {
+  console.log(play_token, playlist_id, set);
+  var track = set.track;
+
+  if ( set.at_end ) {
+    response.end();
+  }
+
 };
 
 var port = process.env.PORT || 3000;
