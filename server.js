@@ -3,12 +3,16 @@
  */
 
 var express = require('express');
-var request = require('request');
+var request = require('request')
 var engines = require('consolidate');
-var app = express();
+var app = express()
+var emitter = new (require('events').EventEmitter)
 
 // actual playtoken that is used in the session
 var play_token;
+
+// tracks
+var tracks = []
 
 app.use(express.logger());
 app.use(express.static(__dirname + '/public'));
@@ -57,7 +61,7 @@ app.post('/playlist', function(req, resp) {
     }
   });
 
-  resp.end();
+  // emitter.emit('end-download', resp);
 });
 
 var download_song = function(response, play_token, playlist_id, set) {
@@ -71,8 +75,10 @@ var download_song = function(response, play_token, playlist_id, set) {
   // track.release_name
 
   if (set.at_end) {
-    response.end();
+    emitter.emit('end-download', response);
   } else {
+    // Add track to the temp listing
+    emitter.emit('add-track', track);
 
     // Start getting next track
     request.get({
@@ -84,6 +90,14 @@ var download_song = function(response, play_token, playlist_id, set) {
       });
   }
 };
+
+emitter.on('add-track', function(track){
+  tracks.push(track);
+});
+
+emitter.on('end-download', function(response){
+  response.json(tracks);
+});
 
 var port = process.env.PORT || 3000;
 app.listen(port);
